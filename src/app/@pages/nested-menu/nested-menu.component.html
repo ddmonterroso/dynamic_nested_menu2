@@ -1,0 +1,29 @@
+<div class="nested-main">
+<mat-card class="nested-menu-card">
+  <mat-card-header>
+    <div mat-card-avatar class="nested-menu-avatar"></div>
+    <mat-card-title>Dynamic Nested Menu</mat-card-title>
+    <mat-card-subtitle>Amazing!!!</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+      <ng-container *ngFor="let item of items">
+        <button *ngIf="!item.children || item.children.length == 0" mat-button>
+          {{ item.name }}
+        </button>
+        <ng-container *ngIf="item.children && item.children.length > 0">
+          <button
+            mat-raised-button
+            color="primary"
+            [matMenuTriggerFor]="menu.childMenu"
+          >
+            {{ item.name }}
+          </button>
+          <app-nested-item #menu [items]="item.children"></app-nested-item>
+        </ng-container>
+      </ng-container>
+    
+  </mat-card-content>
+
+</mat-card>
+</div>
